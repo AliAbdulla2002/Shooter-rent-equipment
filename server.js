@@ -49,7 +49,7 @@ app.delete("/auth/sign-out", authCtrl.signOut);
 
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 
-const startServer = function async (){
+const startServer = async function () {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
 
