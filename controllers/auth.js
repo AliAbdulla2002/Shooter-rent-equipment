@@ -1,19 +1,23 @@
 ﻿const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
-const home = (req, res) => {
+const home = function (req, res){
     res.render("home.ejs", {
         user: req.session.user,
     });
 };
 
-const showSignUpForm = (req, res) => {
+const showSignUpForm = function (req, res){
     res.render("auth/sign-up.ejs", {
         user: req.session.user,
     });
 };
 
-const signUp = async (req, res) => {
+const signUp = async function (req, res){
+    if (req.body.password !== req.body.confirmPassword) {
+        return res.send("Passwords do not match!");
+    }
+
     const userInDatabase = await User.findOne({
         username: req.body.username,
     });
@@ -26,7 +30,9 @@ const signUp = async (req, res) => {
 
     const userData = {
         username: req.body.username,
+        email: req.body.email,
         password: hashedPassword,
+        role: req.body.role
     };
 
     const user = await User.create(userData);
@@ -34,20 +40,21 @@ const signUp = async (req, res) => {
     req.session.user = {
         username: user.username,
         id: user.id,
+        role: user.role
     };
 
-    req.session.save(() => {
+    req.session.save(function (){
         res.redirect("/");
     });
 };
 
-const showSignInForm = (req, res) => {
+const showSignInForm = function (req, res){
     res.render("auth/sign-in.ejs", {
         user: req.session.user,
     });
 };
 
-const signIn = async (req, res) => {
+const signIn = async function (req, res){
     const userInDatabase = await User.findOne({
         username: req.body.username,
     });
@@ -70,18 +77,18 @@ const signIn = async (req, res) => {
         id: userInDatabase.id,
     };
 
-    req.session.save(() => {
+    req.session.save(function (){
         res.redirect("/");
     });
 };
 
-const signOut = (req, res) => {
-    req.session.destroy(() => {
+const signOut = function (req, res){
+    req.session.destroy(function (){
         res.redirect("/");
     });
 };
 
-const dashboard = (req, res) => {
+const dashboard = function (req, res){
     res.render("dashboard.ejs", {
         user: req.session.user,
     });
