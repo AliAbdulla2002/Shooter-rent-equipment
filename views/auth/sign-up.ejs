@@ -11,7 +11,6 @@
 
         <form class="auth-form" action="/auth/sign-up" method="POST">
 
-
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
                 <input
@@ -22,7 +21,6 @@
                     required
                 >
             </div>
-
 
             <div class="form-group">
                 <label class="form-label" for="username">Username</label>
@@ -44,6 +42,31 @@
                     id="password"
                     required
                 >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <input
+                    class="form-input"
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">You are?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="role" value="owner" required>
+                        Equipment Owner
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="role" value="renter" required>
+                        Renter
+                    </label>
+                </div>
             </div>
 
             <button class="primary-button" type="submit">Sign Up</button>
