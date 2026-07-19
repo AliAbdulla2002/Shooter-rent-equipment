@@ -1,13 +1,28 @@
 ﻿<%- include("./partials/nav.ejs") %>
 
-<main>
-    <h1>Shooter</h1>
+<main class="homepage">
+    
+    <section class="hero">
+        <div class="intro">
+            
+            <div class="welcome">
+                <% if (user) { %>
+                    <p class="greeting">Welcome, <%= user.username %>.</p>
+                <% } else { %>
+                    <p class="greeting">Your Express, MongoDB, Mongoose, EJS, and session setup is ready.</p>
+                <% } %>
+            </div>
 
-    <% if (user) { %>
-        <p>Welcome, <%= user.username %>.</p>
-    <% } else { %>
-        <p>Your Express, MongoDB, Mongoose, EJS, and session setup is ready.</p>
-    <% } %>
-</main>
+
+
+<h1>content should be here</h1>
+
+
+
+
+
+ <!-- Footer for best practice  -->
+<%- include("./partials/footer.ejs") %>
+
 </body>
 </html>
