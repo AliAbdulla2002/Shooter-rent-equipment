@@ -47,3 +47,46 @@ app.use(session({
 app.use(passUserToView)
 
 
+app.get('/', (req, res) => {
+    res.render('home.ejs', {
+        user: req.session.user,
+    })
+})
+
+// AUTH ROUTERS
+app.get('/auth/sign-up', authCtrl.showSignUpForm )
+app.post('/auth/sign-up', authCtrl.signUp)
+app.get('/auth/sign-in', authCtrl.showSignInForm)
+app.post('/auth/sign-in', authCtrl.signIn)
+app.delete('/auth/sign-out', authCtrl.signOut)
+
+// EQUIPMENT ROUTERS
+app.get('/equipment/new', isSignedIn, equipmentCtrl.showNewForm)
+app.post('/equipment', isSignedIn, upload.single('image'), equipmentCtrl.create)
+app.get('/equipment', equipmentCtrl.index)
+app.get('/equipment/:equipmentId', isSignedIn, equipmentCtrl.show)
+app.delete('/equipment/:equipmentId', isSignedIn, equipmentCtrl.deleteEquipment)
+app.get('/equipment/:equipmentId/edit', isSignedIn, equipmentCtrl.edit )
+app.put('/equipment/:equipmentId', isSignedIn, equipmentCtrl.update)
+
+app.post('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.favorite) // from lecture if i dont have a time i will deleted
+app.delete('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.unfavorite)
+
+
+// HOMEE
+app.get('/dashboard', isSignedIn, async function (req, res){
+    res.render('dashboard.ejs')
+})
+
+
+// ADD THE  splat function ERROR LIKE LECTURE - Nabila
+app.get('/*splat', function (req, res) {
+    res.render('error.ejs', {
+        msg: 404
+    })
+})
+
+app.listen(port, function (){
+  console.log(`The express app is ready on port ${port}!`)
+})
+
