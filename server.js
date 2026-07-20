@@ -48,11 +48,17 @@ app.post("/auth/sign-up", authCtrl.signUp);
 app.get("/auth/sign-in", authCtrl.showSignInForm);
 app.post("/auth/sign-in", authCtrl.signIn);
 app.delete("/auth/sign-out", authCtrl.signOut);
+
+
+// all CRUD Route
+app.get("/equipment", equipmentCtrl.index);
 app.get("/equipment/new", isSignedIn, equipmentCtrl.renderNewForm);
+app.get("/equipment/:equipmentId", equipmentCtrl.show);
+app.get("/equipment/:equipmentId/edit", isSignedIn, equipmentCtrl.edit);
 app.post("/equipment", isSignedIn, upload.single("image"), equipmentCtrl.createEquipment);
+app.put("/equipment/:equipmentId", isSignedIn, upload.single("image"), equipmentCtrl.update);
+app.delete("/equipment/:equipmentId", isSignedIn, equipmentCtrl.deleteEquipment);
 
-
-app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 
 const startServer = async function () {
     try {
