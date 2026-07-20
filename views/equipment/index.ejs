@@ -1,0 +1,51 @@
+<%- include("../partials/nav.ejs") %>
+
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold">Browse Equipment</h2>
+            <% if (user) { %>
+                <a href="/equipment/new" class="btn btn-danger">List New Gear</a>
+                <% } %>
+        </div>
+        <div class="row g-4">
+            <% if (allEquipment.length> 0) { %>
+                <% allEquipment.forEach(equipment=> { %>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <img src="/uploads/<%= equipment.image %>" class="card-img-top"
+                                alt="<%= equipment.title %>">
+
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="card-title fw-bold mb-0 text-dark">
+                                        <%= equipment.title %>
+                                    </h5>
+                                    <span class="badge bg-danger fs-6">$<%= equipment.dailyPrice %> / day</span>
+                                </div>
+
+                                <p class="text-muted small mb-3">Category: <%= equipment.category %>
+                                </p>
+
+                                <p class="card-text text-muted">
+                                    <%= equipment.description %>
+                                </p>
+                                <a href="/equipment/<%= equipment._id %>"
+                                    class="btn btn-outline-dark mt-auto w-100 fw-bold">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+
+                        <% } else { %>
+                            <div class="col-12 text-center py-5">
+                                <h4 class="text-muted mb-3">No equipment listed yet.</h4>
+                                <% if (user) { %>
+                                    <p>Be the first to list your gear!</p>
+                                    <% } %>
+                            </div>
+                            <% } %>
+
+        </div>
+    </main>
+
+    <%- include("../partials/footer.ejs") %>
