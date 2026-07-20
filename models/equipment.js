@@ -18,11 +18,28 @@ const equipmentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    
+    image: {
+        url: {
+            type: String,
+            required: true,
+        },
+        publicId: {
+            type: String,
+            required: true,
+        },
+    },
+
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-    }
+    },
+
+    favoritedByUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
 }, { timestamps: true })
 
 const Equipment = mongoose.model('Equipment', equipmentSchema)
