@@ -1,0 +1,54 @@
+<%- include("../partials/nav.ejs") %>
+    <main class="container d-flex justify-content-center align-items-center">
+
+        <section class="auth-card shadow-sm border-0">
+            <div class="auth-card-header">
+                <h1 class="auth-card-title">List Your Equipment</h1>
+                <p class="auth-card-subtitle">Add your gear to the marketplace and start earning.</p>
+            </div>
+
+            <form class="auth-form" action="/equipment" method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label class="form-label" for="name">Equipment Name</label>
+                    <input class="form-input" type="text" name="name" id="name" placeholder="cannon R5"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="category">Category</label>
+                    <select class="form-input" name="category" id="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Cinema">Cameras</option>
+                        <option value="Lenses">Lenses</option>
+                        <option value="Lighting">Lighting</option>
+                        <option value="Audio">Audio Gear</option>
+                        <option value="Production">Production Accessories</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="price">Price per Day (BHD)</label>
+                    <input class="form-input" type="number" name="price" id="price" min="0"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-input" name="description" id="description" rows="3"
+                        placeholder="Brief details" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="image">Equipment Image</label>
+                    <input class="form-input" type="file" name="image" id="image"
+                        accept="image/jpeg,image/png,image/webp" required>
+                </div>
+
+                <button class="primary-button mt-2" type="submit">Add Equipment</button>
+            </form>
+        </section>
+
+    </main>
+
+    <%- include("../partials/footer.ejs") %>

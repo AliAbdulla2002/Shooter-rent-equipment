@@ -18,6 +18,8 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
+const equipmentCtrl = require("./controllers/equipment.js");
+
 const app = express();
 
 const PORT = process.env.PORT || 3000; // For me, this is best practice. Usually, the port is placed in .env; if not, 3000 will be used
@@ -46,6 +48,9 @@ app.post("/auth/sign-up", authCtrl.signUp);
 app.get("/auth/sign-in", authCtrl.showSignInForm);
 app.post("/auth/sign-in", authCtrl.signIn);
 app.delete("/auth/sign-out", authCtrl.signOut);
+app.get("/equipment/new", isSignedIn, equipmentCtrl.renderNewForm);
+app.post("/equipment", isSignedIn, upload.single("image"), equipmentCtrl.createEquipment);
+
 
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 
