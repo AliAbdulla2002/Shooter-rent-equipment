@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit <%= foundEquipment.title %></title>
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1>Edit Equipment</h1>
+    
+    <form action="/equipment/<%= foundEquipment._id %>?_method=PUT" method="POST">
+        Title:
+        <input type="text" name="title" value="<%= foundEquipment.title %>" required />
+        
+        Category:
+        <input type="text" name="category" value="<%= foundEquipment.category %>" required />
+        
+        Daily Price (BHD):
+        <input type="number" name="dailyPrice" min="0" value="<%= foundEquipment.dailyPrice %>" required />
+        
+        Description:
+        <textarea name="description" required><%= foundEquipment.description %></textarea>
+        
+        <button type="submit">Update Equipment</button>
+    </form>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>

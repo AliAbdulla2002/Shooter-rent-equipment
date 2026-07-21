@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= foundEquipment.title %> Details</title>
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+
+    <main>
+        <h1><%= foundEquipment.title %></h1>
+        <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" width="400" />
+        
+        <p><strong>Category:</strong> <%= foundEquipment.category %></p>
+        <p><strong>Price:</strong> <%= foundEquipment.dailyPrice %> BHD / day</p>
+        <p><strong>Description:</strong> <%= foundEquipment.description %></p>
+        
+
+        <p><strong>Listed by:</strong> <%= foundEquipment.owner.username %></p>
+
+        <div class="favorites-section">
+            <% if (userHasFavorited) { %>
+                <form action="/equipment/<%= foundEquipment._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Remove from Favorites</button>
+                </form>
+            <% } else { %>
+                <form action="/equipment/<%= foundEquipment._id %>/favorited-by/<%= user._id %>" method="POST">
+                    <button type="submit">Add to Favorites</button>
+                </form>
+            <% } %>
+        </div>
+
+        <% if (user._id === foundEquipment.owner._id.toString()) { %>
+            <div class="owner-actions">
+                <a href="/equipment/<%= foundEquipment._id %>/edit">
+                    <button>Edit Equipment</button>
+                </a>
+                
+                <form action="/equipment/<%= foundEquipment._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit">Delete Equipment</button>
+                </form>
+            </div>
+        <% } %>
+
+    </main>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>
