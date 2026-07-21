@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<body>
+    <%- include("partials/nav.ejs") %>
+
+    <main style="text-align: center; padding: 50px;">
+        <h1>Oops! Something went wrong.</h1>
+        
+        <h2 class="btn btn-danger"><%= msg %></h2>
+        
+        <br>
+        <a href="/">
+            <button>Go back to Home</button>
+        </a>
+    </main>
+
+    <%- include("partials/footer.ejs") %>
+</body>
+</html>
