@@ -118,6 +118,14 @@ const unfavorite = async function (req, res) {
     res.redirect(`/equipment/${req.params.equipmentId}`)
 }
 
+
+const myFavorites = async function (req, res) {
+    const favoriteEquipments = await Equipment.find({ favoritedByUsers: req.session.user._id }).populate('owner')
+    
+    res.render('equipment/favorites.ejs', { favoriteEquipments })
+}
+
+
 module.exports = {
     showNewForm,
     create,
