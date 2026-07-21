@@ -22,6 +22,10 @@ const passUserToView = require('./middleware/pass-user-to-view')
 const authCtrl = require('./controllers/auth')
 const equipmentCtrl = require('./controllers/equipment')
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+
+
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000"
 
