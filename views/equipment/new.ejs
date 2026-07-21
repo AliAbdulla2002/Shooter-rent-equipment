@@ -10,8 +10,8 @@
             <form class="auth-form" action="/equipment" method="POST" enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label class="form-label" for="name">Equipment Name</label>
-                    <input class="form-input" type="text" name="name" id="name" placeholder="cannon R5"
+                    <label class="form-label" for="title">Equipment Name</label>
+                    <input class="form-input" type="text" name="title" id="title" placeholder="Canon R5"
                         required>
                 </div>
 
@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="price">Price per Day (BHD)</label>
-                    <input class="form-input" type="number" name="price" id="price" min="0"
+                    <label class="form-label" for="dailyPrice">Price per Day (BHD)</label>
+                    <input class="form-input" type="number" name="dailyPrice" id="dailyPrice" min="0"
                         required>
                 </div>
 
@@ -51,4 +51,4 @@
 
     </main>
 
-    <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>
