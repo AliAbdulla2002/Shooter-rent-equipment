@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites</title>
+</head>
+<body>
+    <%- include("../partials/nav.ejs") %>
+
+    <main>
+        <h1>My Favorite Equipment</h1>
+
+        <% if (favoriteEquipments.length > 0) { %>
+            <ul>
+                <% favoriteEquipments.forEach(equipment => { %>
+                    <li>
+                        <h2><%= equipment.title %></h2>
+                        <img src="<%= equipment.image.url %>" alt="<%= equipment.title %>" width="250" />
+                        
+                        <p>Category: <%= equipment.category %></p>
+                        <p>Price: <%= equipment.dailyPrice %> BHD / day</p>
+                        
+                        <a href="/equipment/<%= equipment._id %>">
+                            <button>View Details</button>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <div>
+                <h3>You haven't favorited any equipment yet.</h3>
+                <a href="/equipment">
+                    <button>Browse Equipment</button>
+                </a>
+            </div>
+        <% } %>
+    </main>
+
+    <%- include("../partials/footer.ejs") %>
+</body>
+</html>
