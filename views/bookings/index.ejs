@@ -1,0 +1,54 @@
+<%- include("../partials/nav.ejs") %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Bookings</title>
+    </head>
+
+    <body>
+
+        <main>
+            <h1>My Bookings</h1>
+
+            <% if (bookings.length> 0) { %>
+                <ul>
+                    <% bookings.forEach(booking=> { %>
+                        <li>
+                            <% if (booking.equipment) { %>
+                                <h2>Equipment: <%= booking.equipment.title %>
+                                </h2>
+                                <% } else { %>
+                                    <h2>Equipment: (Deleted by Owner)</h2> 
+                                    <% } %>
+                                        <p><strong>Start Date:</strong>
+                                            <%= booking.startDate.toDateString() %>
+                                        </p>
+                                        <p><strong>End Date:</strong>
+                                            <%= booking.endDate.toDateString() %>
+                                        </p>
+                                        <p><strong>Total Price:</strong>
+                                            <%= booking.totalPrice %> BHD
+                                        </p>
+                                        <p><strong>Status:</strong> <span>
+                                                <%= booking.status.toUpperCase() %>
+                                            </span></p>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } else { %>
+                    <div>
+                        <h3>You have no bookings yet.</h3>
+                        <a href="/equipment">
+                            <button class="btn btn-danger">Browse Equipment</button>
+                        </a>
+                    </div>
+                    <% } %>
+        </main>
+
+        <%- include("../partials/footer.ejs") %>
+    </body>
+
+    </html>
