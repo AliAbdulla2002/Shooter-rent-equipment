@@ -17,9 +17,11 @@ const upload = require('./config/multer')
 
 const isSignedIn = require('./middleware/is-signed-in')
 const passUserToView = require('./middleware/pass-user-to-view')
+const isOwner = require('./middleware/is-owner')
 
 const authCtrl = require('./controllers/auth')
 const equipmentCtrl = require('./controllers/equipment')
+
 
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
@@ -66,8 +68,8 @@ app.post('/auth/sign-in', authCtrl.signIn)
 app.delete('/auth/sign-out', authCtrl.signOut)
 
 // EQUIPMENT ROUTERS
-app.get('/equipment/new', isSignedIn, equipmentCtrl.showNewForm)
-app.post('/equipment', isSignedIn, upload.single('image'), equipmentCtrl.create)
+app.get('/equipment/new', isSignedIn, isOwner, equipmentCtrl.showNewForm) // the update check the role first
+app.post('/equipment', isSignedIn, isOwner ,upload.single('image'), equipmentCtrl.create)
 app.get('/equipment', equipmentCtrl.index)
 app.get('/equipment/favorites', isSignedIn, equipmentCtrl.myFavorites) // if the user clicked on the fav
 app.get('/equipment/:equipmentId', isSignedIn, equipmentCtrl.show)
