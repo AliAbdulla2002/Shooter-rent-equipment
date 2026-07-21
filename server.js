@@ -1,5 +1,4 @@
 ﻿const dns = require("node:dns");
-
 // DNS workaround for MongoDB Atlas.
 // Remove these two lines if your regular DNS works correctly.
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
@@ -51,7 +50,7 @@ app.use(session({
 app.use(passUserToView)
 
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
     res.render('home.ejs', {
         user: req.session.user,
     })

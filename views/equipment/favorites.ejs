@@ -1,3 +1,4 @@
+<%- include("../partials/nav.ejs") %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
     <title>My Favorites</title>
 </head>
 <body>
-    <%- include("../partials/nav.ejs") %>
 
     <main>
         <h1>My Favorite Equipment</h1>
@@ -31,7 +31,7 @@
             <div>
                 <h3>You haven't favorited any equipment yet.</h3>
                 <a href="/equipment">
-                    <button>Browse Equipment</button>
+                    <button class="btn btn-danger">Browse Equipment</button>
                 </a>
             </div>
         <% } %>
