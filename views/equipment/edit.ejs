@@ -10,7 +10,7 @@
 
     <h1>Edit Equipment</h1>
     
-    <form action="/equipment/<%= foundEquipment._id %>?_method=PUT" method="POST">
+    <form action="/equipment/<%= foundEquipment._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
         Title:
         <input type="text" name="title" value="<%= foundEquipment.title %>" required />
         
@@ -22,6 +22,13 @@
         
         Description:
         <textarea name="description" required><%= foundEquipment.description %></textarea>
+        
+        <p>Current Image:</p>
+        <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" width="200" />
+        <br>
+
+        Upload New Image:
+        <input type="file" name="image" accept="image/*" />
         
         <button type="submit">Update Equipment</button>
     </form>

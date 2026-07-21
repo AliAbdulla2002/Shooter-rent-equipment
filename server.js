@@ -67,7 +67,7 @@ app.get('/equipment', equipmentCtrl.index)
 app.get('/equipment/:equipmentId', isSignedIn, equipmentCtrl.show)
 app.delete('/equipment/:equipmentId', isSignedIn, equipmentCtrl.deleteEquipment)
 app.get('/equipment/:equipmentId/edit', isSignedIn, equipmentCtrl.edit )
-app.put('/equipment/:equipmentId', isSignedIn, equipmentCtrl.update)
+app.put('/equipment/:equipmentId', isSignedIn, upload.single('image'), equipmentCtrl.update)
 
 app.post('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.favorite) // from lecture if i dont have a time i will deleted
 app.delete('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.unfavorite)

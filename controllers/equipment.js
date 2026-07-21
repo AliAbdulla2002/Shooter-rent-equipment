@@ -85,14 +85,19 @@ const edit = async function (req, res) {
     })
 }
 
-const update = async function (req, res)  {
+const update = async function (req, res) {
     let equipmentData = {}
-
     equipmentData.title = req.body.title
     equipmentData.category = req.body.category
     equipmentData.dailyPrice = req.body.dailyPrice
     equipmentData.description = req.body.description
-
+    if (req.file) {
+        const uploadedImage = await uploadImage(req.file.buffer)
+        equipmentData.image = {
+            url: uploadedImage.secure_url,
+            publicId: uploadedImage.public_id,
+        }
+    }
     await Equipment.findByIdAndUpdate(req.params.equipmentId, equipmentData)
     res.redirect(`/equipment/${req.params.equipmentId}`)
 }
