@@ -11,11 +11,10 @@
     <main>
         <h1><%= foundEquipment.title %></h1>
         <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" width="400" />
-        
+
         <p><strong>Category:</strong> <%= foundEquipment.category %></p>
         <p><strong>Price:</strong> <%= foundEquipment.dailyPrice %> BHD / day</p>
         <p><strong>Description:</strong> <%= foundEquipment.description %></p>
-        
 
         <p><strong>Listed by:</strong> <%= foundEquipment.owner.username %></p>
 
@@ -31,14 +30,33 @@
             <% } %>
         </div>
 
+        <hr>
+
         <% if (user._id === foundEquipment.owner._id.toString()) { %>
             <div class="owner-actions">
                 <a href="/equipment/<%= foundEquipment._id %>/edit">
                     <button class="btn btn-danger">Edit Equipment</button>
                 </a>
-                
+
                 <form action="/equipment/<%= foundEquipment._id %>?_method=DELETE" method="POST" style="display:inline;">
                     <button class="btn btn-danger" type="submit">Delete Equipment</button>
+                </form>
+            </div>
+        <% } else { %>
+            <div class="booking-section mt-4">
+                <h2>Book this Equipment</h2>
+                <form action="/equipment/<%= foundEquipment._id %>/bookings" method="POST">
+                    <p>
+                        Start Date:
+                        <input type="date" name="startDate" required>
+                    </p>
+                    
+                    <p>
+                        End Date:
+                        <input type="date" name="endDate" required>
+                    </p>
+
+                    <button class="btn btn-danger" type="submit">Book Now</button>
                 </form>
             </div>
         <% } %>
