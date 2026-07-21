@@ -16,6 +16,9 @@ const signUp = async function (req, res) {
 
     let userData = {}
     userData.username = req.body.username
+    
+    userData.email = req.body.email
+    userData.role = req.body.role
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10)
     userData.password = hashedPassword
@@ -24,7 +27,8 @@ const signUp = async function (req, res) {
 
     req.session.user = {
         username: user.username,
-        _id: user._id
+        _id: user._id,
+        role: user.role
     }
     req.session.save(function (){
         res.redirect('/')
