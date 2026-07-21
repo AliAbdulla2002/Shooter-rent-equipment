@@ -83,6 +83,8 @@ app.delete('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipment
 app.get('/bookings/my-bookings', isSignedIn, bookingCtrl.myBookings)
 app.post('/equipment/:equipmentId/bookings', isSignedIn, bookingCtrl.createBooking)
 
+app.get('/owner/dashboard', isSignedIn, isOwner, bookingCtrl.ownerDashboard)
+
 
 // HOMEE
 app.get('/dashboard', isSignedIn, async function (req, res){
