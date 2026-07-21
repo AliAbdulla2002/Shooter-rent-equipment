@@ -1,68 +1,80 @@
 ﻿<%- include("./partials/nav.ejs") %>
 
-<main class="homepage" >
-    
-    <section class="banner">
-        <div class="overlay">
-            <div class="intro">
-                
-                <div class="welcome">
-                    <% if (user) { %>
-                        <p class="greeting">Welcome back,  <%= user.username %><br /> Ready to shoot?</p>
-                    <% } else { %>
-                        <p class="greeting">Join the community to rent or list professional gear.</p>
-                    <% } %>
-                </div>
+    <main class="homepage">
 
-                <h1 class="title text-center">Elevate Your Vision with Pro Gear.</h1>
-                <p class="description">
-                    Access the industry's most advanced cinematography equipment through our peer-to-peer marketplace. Professional results without the capital overhead.
-                </p>
-                
-                <div class="actions">
-                    <a class="btn btn-danger" href="/equipment">Browse Gear</a>
-                    <a class="btn btn-light" href="/equipment/new">List Your Equipment</a>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section class="banner">
+            <div class="overlay">
+                <div class="intro">
 
-    <section class="workflow container mt-5">
-        <h2 class="mb-3">Master Your Workflow</h2>
-        <p class="mb-5 text-muted">Seamless transactions designed for the technical demands of professional production.</p>
-        
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title text-danger">For Renters</h3>
-                        <ol>
-                            <li><strong>Discover & Request:</strong> Browse curated listings and request gear based on your shoot schedule.</li>
-                            <br />
-                            <li><strong>Secure Pick-up:</strong> Coordinate with verified owners for hand over or professional delivery.</li>
-                            <br />
-                            <li><strong>Create & Return:</strong> Focus on your vision. Return the gear once the production wraps.</li>
-                        </ol>
+                    <div class="welcome">
+                        <% if (user) { %>
+                            <p class="greeting">Welcome back, <%= user.username %><br /> Ready to shoot?</p>
+                            <% } else { %>
+                                <p class="greeting">Join the community to rent or list professional gear.</p>
+                                <% } %>
+                    </div>
+
+                    <h1 class="title text-center">Elevate Your Vision with Pro Gear.</h1>
+                    <p class="description">
+                        Access the industry's most advanced cinematography equipment through our peer-to-peer
+                        marketplace. Professional results without the capital overhead.
+                    </p>
+
+                    <div class="actions">
+                        <a class="btn btn-danger" href="/equipment">Browse Gear</a>
+                        <% if (!user || user.role==='owner' ) { %>
+                            <a class="btn btn-light" href="/equipment/new">List Your Equipment</a>
+                            <% } else if (user && user.role==='renter' ) { %>
+                                <a class="btn btn-light" href="/bookings/my-bookings">My Bookings</a>
+                                <% } %>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-sm-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title text-danger">For Owners</h3>
-                        <ol>
-                            <li><strong>List Your Inventory:</strong> Create high spec listings for your equipment with detailed tech data.</li>
-                            <br />
-                            <li><strong>Vetted Approvals:</strong> Review rental requests from verified creators in the community.</li>
-                            <br />
-                            <li><strong>Earn & Insure:</strong> Monetize your idle gear with total peace of mind through our coverage.</li>
-                        </ol>
+        </section>
+
+        <section class="workflow container mt-5">
+            <h2 class="mb-3">Master Your Workflow</h2>
+            <p class="mb-5 text-muted">Seamless transactions designed for the technical demands of professional
+                production.</p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title text-danger">For Renters</h3>
+                            <ol>
+                                <li><strong>Discover & Request:</strong> Browse curated listings and request gear based
+                                    on your shoot schedule.</li>
+                                <br />
+                                <li><strong>Secure Pick-up:</strong> Coordinate with verified owners for hand over or
+                                    professional delivery.</li>
+                                <br />
+                                <li><strong>Create & Return:</strong> Focus on your vision. Return the gear once the
+                                    production wraps.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title text-danger">For Owners</h3>
+                            <ol>
+                                <li><strong>List Your Inventory:</strong> Create high spec listings for your equipment
+                                    with detailed tech data.</li>
+                                <br />
+                                <li><strong>Vetted Approvals:</strong> Review rental requests from verified creators in
+                                    the community.</li>
+                                <br />
+                                <li><strong>Earn & Insure:</strong> Monetize your idle gear with total peace of mind
+                                    through our coverage.</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
-<%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>

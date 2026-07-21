@@ -21,8 +21,12 @@
 
             <% if (user) { %>
                 <a class="site-nav-link" href="/equipment/favorites">My Favorite</a>
+                
+                <a class="site-nav-link" href="/bookings/my-bookings">My Bookings</a>
 
-                <a class="site-nav-link" href="/equipment/new">List Your Equipment</a>
+                <% if (user.role === 'owner') { %>
+                    <a class="site-nav-link" href="/equipment/new">List Your Equipment</a>
+                <% } %>
 
                 <form
                     class="site-nav-form"
