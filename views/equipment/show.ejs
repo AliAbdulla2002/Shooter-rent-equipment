@@ -22,11 +22,11 @@
         <div class="favorites-section">
             <% if (userHasFavorited) { %>
                 <form action="/equipment/<%= foundEquipment._id %>/favorited-by/<%= user._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Remove from Favorites</button>
+                    <button class="btn btn-danger" type="submit">❤</button>
                 </form>
             <% } else { %>
                 <form action="/equipment/<%= foundEquipment._id %>/favorited-by/<%= user._id %>" method="POST">
-                    <button type="submit">Add to Favorites</button>
+                    <button type="submit">🤍</button>
                 </form>
             <% } %>
         </div>
@@ -34,11 +34,11 @@
         <% if (user._id === foundEquipment.owner._id.toString()) { %>
             <div class="owner-actions">
                 <a href="/equipment/<%= foundEquipment._id %>/edit">
-                    <button>Edit Equipment</button>
+                    <button class="btn btn-danger">Edit Equipment</button>
                 </a>
                 
                 <form action="/equipment/<%= foundEquipment._id %>?_method=DELETE" method="POST" style="display:inline;">
-                    <button type="submit">Delete Equipment</button>
+                    <button class="btn btn-danger" type="submit">Delete Equipment</button>
                 </form>
             </div>
         <% } %>

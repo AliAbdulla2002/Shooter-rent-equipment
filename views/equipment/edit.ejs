@@ -1,3 +1,4 @@
+<%- include("../partials/nav.ejs") %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
     <title>Edit <%= foundEquipment.title %></title>
 </head>
 <body>
-    <%- include("../partials/nav.ejs") %>
 
     <h1>Edit Equipment</h1>
     
@@ -30,7 +30,7 @@
         Upload New Image:
         <input type="file" name="image" accept="image/*" />
         
-        <button type="submit">Update Equipment</button>
+        <button class="btn btn-danger" type="submit">Update Equipment</button>
     </form>
 
     <%- include("../partials/footer.ejs") %>
