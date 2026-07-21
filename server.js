@@ -25,6 +25,8 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
 
+const bookingCtrl = require('./controllers/booking')
+
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000"
 
@@ -75,6 +77,9 @@ app.put('/equipment/:equipmentId', isSignedIn, upload.single('image'), equipment
 
 app.post('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.favorite) // from lecture if i dont have a time i will deleted
 app.delete('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.unfavorite)
+
+app.get('/bookings/my-bookings', isSignedIn, bookingCtrl.myBookings)
+app.post('/equipment/:equipmentId/bookings', isSignedIn, bookingCtrl.createBooking)
 
 
 // HOMEE
