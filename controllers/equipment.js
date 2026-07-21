@@ -136,4 +136,5 @@ module.exports = {
     update,
     favorite,
     unfavorite,
+    myFavorites,
 }

@@ -75,6 +75,7 @@ app.put('/equipment/:equipmentId', isSignedIn, upload.single('image'), equipment
 
 app.post('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.favorite) // from lecture if i dont have a time i will deleted
 app.delete('/equipment/:equipmentId/favorited-by/:userId', isSignedIn, equipmentCtrl.unfavorite)
+app.get('/equipment/favorites', isSignedIn, equipmentCtrl.myFavorites) // if the user clicked on the fav
 
 
 // HOMEE
