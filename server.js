@@ -85,6 +85,8 @@ app.post('/equipment/:equipmentId/bookings', isSignedIn, bookingCtrl.createBooki
 
 app.get('/owner/dashboard', isSignedIn, isOwner, bookingCtrl.ownerDashboard)
 
+app.delete('/bookings/:bookingId', isSignedIn, bookingCtrl.cancelBooking) // to cancel the booking 
+
 
 // HOMEE
 app.get('/dashboard', isSignedIn, async function (req, res){

@@ -56,8 +56,26 @@ const ownerDashboard = async function (req, res) {
     }
 }
 
+
+const cancelBooking = async function (req, res) {
+    try {
+        await Booking.findOneAndDelete({
+            _id: req.params.bookingId,
+            renter: req.session.user._id
+        })
+        
+        res.redirect('/bookings/my-bookings')
+    } catch (error) {
+        console.log(error)
+        res.render('error.ejs', { msg: 'Could not cancel the booking.' })
+    }
+}
+
+
+
 module.exports = {
     createBooking,
     myBookings,
     ownerDashboard,
+    cancelBooking,
 }
