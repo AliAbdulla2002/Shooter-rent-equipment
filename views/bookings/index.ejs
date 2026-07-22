@@ -21,7 +21,7 @@
                                 <h2>Equipment: <%= booking.equipment.title %>
                                 </h2>
                                 <% } else { %>
-                                    <h2>Equipment: (Deleted by Owner)</h2> 
+                                    <h2>Equipment: (Deleted by Owner)</h2>
                                     <% } %>
                                         <p><strong>Start Date:</strong>
                                             <%= booking.startDate.toDateString() %>
@@ -35,6 +35,13 @@
                                         <p><strong>Status:</strong> <span>
                                                 <%= booking.status.toUpperCase() %>
                                             </span></p>
+
+                                        <% if (booking.status==='pending' ) { %>
+                                            <form action="/bookings/<%= booking._id %>?_method=DELETE" method="POST">
+                                                <button class="btn btn-danger btn-sm" type="submit">Cancel
+                                                    Booking</button>
+                                            </form>
+                                            <% } %>
                         </li>
                         <% }) %>
                 </ul>
