@@ -16,7 +16,7 @@
             <h1>
                 <%= foundEquipment.title %>
             </h1>
-            <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" width="400" />
+            <img src="<%= foundEquipment.image %>" alt="<%= foundEquipment.title %>" width="400" />
 
             <p><strong>Category:</strong>
                 <%= foundEquipment.category %>
@@ -45,6 +45,7 @@
                         <% } %>
             </div>
 
+            <hr>
 
             <% if (user._id===foundEquipment.owner._id.toString()) { %>
                 <div class="owner-actions">
@@ -58,7 +59,6 @@
                     </form>
                 </div>
                 <% } else if (user.role ==='renter' ) { %>
-                    <hr>
 
                     <div class="booking-section mt-4">
                         <h2>Book this Equipment</h2>
