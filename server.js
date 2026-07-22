@@ -89,6 +89,8 @@ app.delete('/bookings/:bookingId', isSignedIn, bookingCtrl.cancelBooking) // to 
 
 app.put('/owner/bookings/:bookingId', isSignedIn, isOwner, bookingCtrl.updateBookingStatus) // to update booking status
 
+app.get('/equipment/:equipmentId/delete', isSignedIn, equipmentCtrl.showDeleteConfirm) // to show the confrimation delete
+
 // HOMEE
 app.get('/dashboard', isSignedIn, async function (req, res){
     res.render('dashboard.ejs')

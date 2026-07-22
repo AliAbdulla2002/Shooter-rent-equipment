@@ -48,17 +48,14 @@
             <hr>
 
             <% if (user._id===foundEquipment.owner._id.toString()) { %>
-                <div class="owner-actions">
-                    <a href="/equipment/<%= foundEquipment._id %>/edit">
-                        <button class="btn btn-danger">Edit Equipment</button>
-                    </a>
+                <a href="/equipment/<%= foundEquipment._id %>/edit">
+                    <button class="btn btn-danger" type="button">Edit Equipment</button>
+                </a>
 
-                    <form action="/equipment/<%= foundEquipment._id %>?_method=DELETE" method="POST"
-                        style="display:inline;">
-                        <button class="btn btn-danger" type="submit">Delete Equipment</button>
-                    </form>
-                </div>
-                <% } else if (user.role ==='renter' ) { %>
+                <a href="/equipment/<%= foundEquipment._id %>/delete">
+                    <button class="btn btn-danger" type="button">Delete Equipment</button>
+                </a>
+                <% } else if (user.role==='renter' ) { %>
 
                     <div class="booking-section mt-4">
                         <h2>Book this Equipment</h2>

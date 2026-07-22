@@ -126,6 +126,16 @@ const myFavorites = async function (req, res) {
 }
 
 
+const showDeleteConfirm = async function (req, res) {
+    try {
+        const foundEquipment = await Equipment.findById(req.params.equipmentId)
+        res.render('equipment/delete-confirm.ejs', { foundEquipment })
+    } catch (error) {
+        console.log(error)
+        res.render('error.ejs', { msg: 'Could not load confirmation page.' })
+    }
+}
+
 module.exports = {
     showNewForm,
     create,
@@ -137,4 +147,5 @@ module.exports = {
     favorite,
     unfavorite,
     myFavorites,
+    showDeleteConfirm,
 }
