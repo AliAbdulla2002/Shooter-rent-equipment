@@ -1,0 +1,65 @@
+# 🎥 Shooter Equipments
+
+A peer-to-peer marketplace that tests your creativity by connecting cinematography gear owners with passionate creators. Access professional equipment without the capital overhead.
+
+screen
+
+## 🚀 Getting Started
+
+* **[Play the App / Live Demo](#)** *(https://shooter-rent-equipment.onrender.com/)*
+* **[Repository](https://github.com/AliAbdulla2002/Shooter-rent-equipment)**
+
+## 📖 How it Works
+
+**For Renters:**
+1. Browse the curated list of professional equipment.
+2. Add your favorite gear to your personal wishlist.
+3. Select your start and end dates, and book the equipment securely.
+4. Check "My Bookings" to track the status of your requests.
+
+**For Owners:**
+1. Register and log in as an Equipment Owner.
+2. List your professional gear by filling out the details, pricing, and uploading an image.
+3. Manage your inventory seamlessly (Edit or Delete listings at any time).
+
+## 💻 Installation
+
+To run this project locally, clone the repo to your machine and follow these steps:
+
+```bash
+# 1. Clone the repository
+git clone [https://github.com/AliAbdulla2002/Shooter-rent-equipment](https://github.com/AliAbdulla2002/Shooter-rent-equipment)
+
+# 2. Navigate to the project folder
+cd shooter-equipments
+
+# 3. Install dependencies
+npm install
+
+# 4. Set up Environment Variables
+# Create a .env file and add your PORT, MONGODB_URI, and SESSION_SECRET
+
+# 5. Start the server
+npm start
+
+
+Open http://localhost:3000 in your browser.
+
+## 🛠️ Technologies Used
+1. Frontend: HTML, CSS, Bootstrap 5, EJS
+
+2. Backend: Node.js, Express.js
+
+3. Database: MongoDB, Mongoose
+
+## 🔮 Future Enhancements
+1. Add an online payment gateway integration (e.g., Stripe).
+
+2. Implement a rating and review system for users and equipment.
+
+3. Add advanced search filters (by price range, brand, or availability).
+
+4. Improve the dashboard for Owners to approve/reject bookings.
+
+🤝 Credits
+Developed by Ali as part of the Software Engineering Bootcamp project. Inspired by the need for accessible creative tools in the media production community.
