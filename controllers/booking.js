@@ -72,10 +72,24 @@ const cancelBooking = async function (req, res) {
 }
 
 
+ const updateBookingStatus = async function (req, res) {
+    try {
+        await Booking.findByIdAndUpdate(req.params.bookingId, {
+            status: req.body.status
+        })
+        res.redirect('/owner/dashboard')
+    } catch (error) {
+        console.log(error)
+        res.render('error.ejs', { msg: 'Could not update the booking status.' })
+    }
+}
+
+
 
 module.exports = {
     createBooking,
     myBookings,
     ownerDashboard,
     cancelBooking,
+    updateBookingStatus,
 }
