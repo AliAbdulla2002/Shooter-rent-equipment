@@ -51,7 +51,7 @@ Open http://localhost:3000 in your browser.
 
 2. Backend: Node.js, Express.js
 
-3. Database: MongoDB, Mongoose
+3. Database: MongoDB, Mongoose, cloudinary
 
 ## 🔮 Future Enhancements
 1. Add an online payment gateway integration (e.g., Stripe).
