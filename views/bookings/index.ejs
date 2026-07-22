@@ -1,61 +1,72 @@
 <%- include("../partials/nav.ejs") %>
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Bookings</title>
-    </head>
+<main class="container my-5">
+    
+    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+        <i class="bi bi-calendar2-check-fill text-danger fs-2 me-3"></i>
+        <h1 class="fw-bold mb-0">My Bookings</h1>
+    </div>
 
-    <body>
-
-        <main>
-            <h1>My Bookings</h1>
-
-            <% if (bookings.length> 0) { %>
-                <ul>
-                    <% bookings.forEach(booking=> { %>
-                        <li>
+    <div class="row g-4">
+        <% if (bookings.length > 0) { %>
+            <% bookings.forEach(booking => { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4">
+                        <div class="card-body p-4 d-flex flex-column">
+                            
                             <% if (booking.equipment) { %>
-                                <h2>Equipment: <%= booking.equipment.title %>
-                                </h2>
-                                <% } else { %>
-                                    <h2>Equipment: (Deleted by Owner)</h2>
-                                    <% } %>
-                                        <p><strong>Start Date:</strong>
-                                            <%= booking.startDate.toDateString() %>
-                                        </p>
-                                        <p><strong>End Date:</strong>
-                                            <%= booking.endDate.toDateString() %>
-                                        </p>
-                                        <p><strong>Total Price:</strong>
-                                            <%= booking.totalPrice %> BHD
-                                        </p>
-                                        <p><strong>Status:</strong> <span>
-                                                <%= booking.status.toUpperCase() %>
-                                            </span></p>
+                                <h4 class="card-title fw-bold mb-4 text-dark"><%= booking.equipment.title %></h4>
+                            <% } else { %>
+                                <h4 class="card-title fw-bold text-muted mb-2">
+                                    <i class="bi bi-exclamation-circle me-2"></i>Equipment Unavailable
+                                </h4>
+                                <p class="small text-danger fw-bold mb-4">(Deleted by Owner)</p>
+                            <% } %>
 
-                                        <% if (booking.status==='pending' ) { %>
-                                            <form action="/bookings/<%= booking._id %>?_method=DELETE" method="POST">
-                                                <button class="btn btn-danger btn-sm" type="submit">Cancel
-                                                    Booking</button>
-                                            </form>
-                                            <% } %>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } else { %>
-                    <div>
-                        <h3>You have no bookings yet.</h3>
-                        <a href="/equipment">
-                            <button class="btn btn-danger">Browse Equipment</button>
-                        </a>
+                            <div class="mb-4 text-muted fs-6" style="line-height: 2;">
+                                <div>
+                                    <i class="bi bi-calendar-event me-2 text-dark"></i>
+                                    <strong>Start:</strong> <%= booking.startDate.toDateString() %>
+                                </div>
+                                <div>
+                                    <i class="bi bi-calendar-check me-2 text-dark"></i>
+                                    <strong>End:</strong> <%= booking.endDate.toDateString() %>
+                                </div>
+                                <div>
+                                    <i class="bi bi-cash-stack me-2 text-dark"></i>
+                                    <strong>Total:</strong> <span class="text-danger fw-bold"><%= booking.totalPrice %> BHD</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <strong class="text-muted">Status:</strong> 
+                                <span class="badge <%= booking.status === 'pending' ? 'bg-warning text-dark' : (booking.status === 'approved' ? 'bg-success' : 'bg-secondary') %> ms-2 fs-6">
+                                    <%= booking.status.toUpperCase() %>
+                                </span>
+                            </div>
+
+                            <% if (booking.status === 'pending') { %>
+                                <form action="/bookings/<%= booking._id %>?_method=DELETE" method="POST" class="m-0 mt-auto">
+                                    <button class="btn btn-outline-danger w-100 fw-bold" type="submit">Cancel Booking</button>
+                                </form>
+                            <% } %>
+                            
+                        </div>
                     </div>
-                    <% } %>
-        </main>
+                </div>
+            <% }) %>
+            
+        <% } else { %>
+            <div class="col-12 text-center py-5">
+                <div class="py-5">
+                    <i class="bi bi-calendar-x display-1 text-muted mb-3 d-block"></i>
+                    <h3 class="fw-bold mb-3">You have no bookings yet.</h3>
+                    <p class="text-muted mb-4">Find the perfect gear for your next shoot!</p>
+                    <a href="/equipment" class="btn btn-danger btn-lg px-5 fw-bold">Browse Equipment</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</main>
 
-        <%- include("../partials/footer.ejs") %>
-    </body>
-
-    </html>
+<%- include("../partials/footer.ejs") %>
