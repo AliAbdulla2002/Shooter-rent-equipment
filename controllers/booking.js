@@ -41,17 +41,14 @@ const myBookings = async function (req, res) {
 }
 
 
-
 const ownerDashboard = async function (req, res) {
     try {
         const myEquipments = await Equipment.find({ owner: req.session.user._id })
         
-        const myEquipmentsIds = myEquipments.map(eq => eq._id)
-        
+        const myEquipmentsIds = myEquipments.map(eq => eq._id) // by search it
         const bookingRequests = await Booking.find({ equipment: { $in: myEquipmentsIds } })
             .populate('equipment')
             .populate('renter')
-        
         res.render('bookings/dashboard.ejs', { bookingRequests, myEquipments })
     } catch (error) {
         console.log(error)
