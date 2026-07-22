@@ -1,38 +1,66 @@
 <%- include("../partials/nav.ejs") %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit <%= foundEquipment.title %></title>
-</head>
-<body>
 
-    <h1>Edit Equipment</h1>
-    
-    <form action="/equipment/<%= foundEquipment._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-        Title:
-        <input type="text" name="title" value="<%= foundEquipment.title %>" required />
-        
-        Category:
-        <input type="text" name="category" value="<%= foundEquipment.category %>" required />
-        
-        Daily Price (BHD):
-        <input type="number" name="dailyPrice" min="0" value="<%= foundEquipment.dailyPrice %>" required />
-        
-        Description:
-        <textarea name="description" required><%= foundEquipment.description %></textarea>
-        
-        <p>Current Image:</p>
-        <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" width="200" />
-        <br>
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            
+            <section class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <div class="text-center mb-4">
+                        <h1 class="fw-bold mb-2">Edit Equipment</h1>
+                        <p class="text-muted">Update the details of your gear.</p>
+                    </div>
 
-        Upload New Image:
-        <input type="file" name="image" accept="image/*" />
-        
-        <button class="btn btn-danger" type="submit">Update Equipment</button>
-    </form>
+                    <form action="/equipment/<%= foundEquipment._id %>?_method=PUT" method="POST" enctype="multipart/form-data" autocomplete="off">
 
-    <%- include("../partials/footer.ejs") %>
-</body>
-</html>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="title">Equipment Name</label>
+                            <input class="form-control form-control-lg bg-light border-0" type="text" name="title" id="title" value="<%= foundEquipment.title %>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="category">Category</label>
+                            <select class="form-select form-select-lg bg-light border-0" name="category" id="category" required>
+                                <option value="Cameras" <%= foundEquipment.category === 'Cameras' ? 'selected' : '' %>>Cameras</option>
+                                <option value="Lenses" <%= foundEquipment.category === 'Lenses' ? 'selected' : '' %>>Lenses</option>
+                                <option value="Lighting" <%= foundEquipment.category === 'Lighting' ? 'selected' : '' %>>Lighting</option>
+                                <option value="Audio Gear" <%= foundEquipment.category === 'Audio Gear' ? 'selected' : '' %>>Audio Gear</option>
+                                <option value="Production Accessories" <%= foundEquipment.category === 'Production Accessories' ? 'selected' : '' %>>Production Accessories</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="dailyPrice">Price per Day</label>
+                            <div class="input-group input-group-lg shadow-sm">
+                                <input class="form-control bg-light border-0" type="number" name="dailyPrice" id="dailyPrice" min="0" value="<%= foundEquipment.dailyPrice %>" required>
+                                <span class="input-group-text bg-danger text-white border-0">BHD</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" for="description">Description</label>
+                            <textarea class="form-control bg-light border-0" name="description" id="description" rows="4" required><%= foundEquipment.description %></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Current Image</label>
+                            <div class="d-block mb-3">
+                                <img src="<%= foundEquipment.image.url %>" alt="<%= foundEquipment.title %>" class="img-thumbnail rounded-3 shadow-sm" style="max-height: 200px; object-fit: cover;">
+                            </div>
+                            
+                            <label class="form-label fw-bold" for="image">Upload New Image (Optional)</label>
+                            <input class="form-control bg-light border-0" type="file" name="image" id="image" accept="image/jpeg,image/png,image/webp">
+                        </div>
+
+                        <button class="btn btn-danger btn-lg w-100 fw-bold mt-2" type="submit">Update Equipment</button>
+                    </form>
+                    
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+<%- include("../partials/footer.ejs") %>
