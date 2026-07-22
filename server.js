@@ -87,6 +87,7 @@ app.get('/owner/dashboard', isSignedIn, isOwner, bookingCtrl.ownerDashboard)
 
 app.delete('/bookings/:bookingId', isSignedIn, bookingCtrl.cancelBooking) // to cancel the booking 
 
+app.put('/owner/bookings/:bookingId', isSignedIn, isOwner, bookingCtrl.updateBookingStatus) // to update booking status
 
 // HOMEE
 app.get('/dashboard', isSignedIn, async function (req, res){

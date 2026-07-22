@@ -1,57 +1,87 @@
 <%- include("../partials/nav.ejs") %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner Dashboard</title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <main class="container mt-5">
-        <h1 class="mb-4">Owner Dashboard</h1>
-        
-        <h2 class="text-danger mb-3">Rental Requests</h2>
-        
-        <% if (bookingRequests.length > 0) { %>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Equipment</th>
-                            <th>Renter Name</th>
-                            <th>Contact Email</th>
-                            <th>Dates</th>
-                            <th>Total Price</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% bookingRequests.forEach(booking => { %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Owner Dashboard</title>
+    </head>
+
+    <body>
+
+        <main class="container mt-5">
+            <h1 class="mb-4">Owner Dashboard</h1>
+
+            <h2 class="text-danger mb-3">Rental Requests</h2>
+
+            <% if (bookingRequests.length> 0) { %>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
                             <tr>
-                                <td><%= booking.equipment.title %></td>
-                                <td><strong><%= booking.renter.username %></strong></td>
-                                <td><a href="mailto:<%= booking.renter.email %>"><%= booking.renter.email %></a></td>
-                                
-                                <td><%= booking.startDate.toDateString() %> - <%= booking.endDate.toDateString() %></td>
-                                <td><%= booking.totalPrice %> BHD</td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">
-                                        <%= booking.status.toUpperCase() %>
-                                    </span>
-                                </td>
+                                <th>Equipment</th>
+                                <th>Renter Name</th>
+                                <th>Contact Email</th>
+                                <th>Dates</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
                             </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
-        <% } else { %>
-            <div class="alert alert-info">
-                You don't have any rental requests yet.
-            </div>
-        <% } %>
-    </main>
+                        </thead>
+                        <tbody>
+                            <% bookingRequests.forEach(booking=> { %>
+                                <tr>
+                                    <td>
+                                        <%= booking.equipment.title %>
+                                    </td>
+                                    <td><strong>
+                                            <%= booking.renter.username %>
+                                        </strong></td>
+                                    <td><a href="mailto:<%= booking.renter.email %>">
+                                            <%= booking.renter.email %>
+                                        </a></td>
 
-    <%- include("../partials/footer.ejs") %>
-</body>
-</html>
+                                    <td>
+                                        <%= booking.startDate.toDateString() %> - <%= booking.endDate.toDateString() %>
+                                    </td>
+                                    <td>
+                                        <%= booking.totalPrice %> BHD
+                                    </td>
+                                    <td>
+                                        <% if (booking.status==='pending' ) { %>
+                                            <div class="d-flex gap-2">
+                                                <form action="/owner/bookings/<%= booking._id %>?_method=PUT"
+                                                    method="POST">
+                                                    <input type="hidden" name="status" value="approved">
+                                                    <button class="btn btn-success btn-sm"
+                                                        type="submit">Approve</button>
+                                                </form>
+                                                <form action="/owner/bookings/<%= booking._id %>?_method=PUT"
+                                                    method="POST">
+                                                    <input type="hidden" name="status" value="rejected">
+                                                    <button class="btn btn-danger btn-sm" type="submit">Reject</button>
+                                                </form>
+                                            </div>
+                                            <% } else { %>
+                                                <span
+                                                    class="badge <%= booking.status === 'approved' ? 'bg-success' : 'bg-danger' %> text-white">
+                                                    <%= booking.status.toUpperCase() %>
+                                                </span>
+                                                <% } %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                    <div class="alert alert-info">
+                        You don't have any rental requests yet.
+                    </div>
+                    <% } %>
+        </main>
+
+        <%- include("../partials/footer.ejs") %>
+    </body>
+
+    </html>
