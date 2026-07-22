@@ -11,12 +11,19 @@ const signUp = async function (req, res) {
     })
 
     if (userInDatabase) {
-        return res.send('Username already taken.')
+        return res.render('error.ejs', { msg: 'Username already taken.' })
+    }
+
+    if (req.body.password.length < 6) {
+        return res.render('error.ejs', { msg: 'Password must be at least 6 characters long.' })
+    }
+
+    if (req.body.password !== req.body.confirmPassword) {
+        return res.render('error.ejs', { msg: 'Passwords do not match. Please try again.' })
     }
 
     let userData = {}
     userData.username = req.body.username
-    
     userData.email = req.body.email
     userData.role = req.body.role
 
@@ -45,13 +52,13 @@ const signIn = async function (req, res) {
     })
 
     if (!userInDatabase) {
-        return res.send('User does not exist.')
+        return res.render('error.ejs', { msg: 'User does not exist.' })
     }
 
     const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
 
     if(!validPassword) {
-        return res.send('Login failed. Please try again.')
+        return res.render('error.ejs', { msg: 'Login failed. Please try again.' })
     }
 
     req.session.user = {
