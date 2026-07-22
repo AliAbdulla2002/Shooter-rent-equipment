@@ -26,7 +26,9 @@
             <% if (user) { %>
                 <a class="site-nav-link" href="/equipment/favorites">My Favorite</a>
 
-                <a class="site-nav-link" href="/bookings/my-bookings">My Bookings</a>
+                <% if (user.role==='renter' ) { %>
+                    <a class="site-nav-link" href="/bookings/my-bookings">My Bookings</a>
+                    <% } %>
 
                         <% if (user.role==='owner' ) { %>
                             <a class="site-nav-link" href="/owner/dashboard">Dashboard</a>
